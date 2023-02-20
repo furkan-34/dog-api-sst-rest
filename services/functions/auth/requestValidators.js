@@ -22,7 +22,7 @@ export const signInUserRequestValidator = {
       type: 'object',
       properties: {
           email: { type: 'string', minLength: 1, maxLength: 30},
-          password: { type: 'string', minLength: 6, maxLength: 30},
+          password: { type: 'string', minLength: 1, maxLength: 30},
       },
       required: ['email', "password"]
     },

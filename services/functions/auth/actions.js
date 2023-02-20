@@ -55,6 +55,7 @@ export const signInUser = lambdaHandler(async (event) => {
    
   const { email, password } = event.body
 
+
   const cognitoClient = new CognitoIdentityProviderClient({
     region: process.env.SERVICE_REGION
   })
@@ -69,10 +70,12 @@ export const signInUser = lambdaHandler(async (event) => {
  })
 
   try {
+
     const signIn = await cognitoClient.send(initiateAuthCommand)
     return apiResponse(200, {signIn: signIn.AuthenticationResult})
 
   } catch (error) {
+    if (error.name == "NotAuthorizedException") throw new createHttpError.Unauthorized()
     throw new createHttpError.InternalServerError({error: error.name})
   }
 }, signInUserRequestValidator)

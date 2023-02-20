@@ -29,7 +29,7 @@ export const listImages = lambdaHandler(async (event) => {
 
         try {
             const dogResponse = await axios.get(process.env.DOG_API + `/breed/${search}/images`)
-            return apiResponse(200, { images: dogResponse.data.message })
+            return apiResponse(200, { images: dogResponse.data.message.slice(0, 10) })
         } catch (error) {
             throw new createHttpError.BadRequest()
         }
