@@ -77,24 +77,24 @@ export const deleteFromFavorites = lambdaHandler(async (event) => {
     const { identifier } = event.pathParameters
     
     const user = event.requestContext.authorizer.jwt.claims
-    
+
     const dynamoDBClient = new DynamoDBClient({
         region: process.env.SERVICE_REGION
     })
 
     const scanCommand  = new ScanCommand({
         TableName: process.env.DogsTable,
-        FilterExpression: "identifier = :identifier and username = :username",
+        FilterExpression: "identifier=:identifier and username=:username",
         ExpressionAttributeValues: {
         ":identifier": { "S": `${identifier}` },
         ":username": { "S": `${user.email}` }
-        },
-        Limit: 1
+        }
     })
 
     try {
         const scanResponse = await dynamoDBClient.send(scanCommand)
         const item = unmarshall(scanResponse.Items[0])
+        
         if (!item) throw new createHttpError.NotFound({ message: "Item Not Exists."})
 
         const deleteItemCommand = new DeleteItemCommand({
