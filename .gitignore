@@ -1,0 +1,14 @@
+# dependencies
+node_modules
+package-lock
+yarn.lock
+
+# sst
+.sst
+.build
+
+# misc
+.DS_Store
+
+# local env files
+.env*.local

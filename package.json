@@ -1,0 +1,51 @@
+{
+  "name": "dog-api-sst-rest",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "sst start --stage local",
+    "build": "sst build --stage local",
+    "deploy": "sst deploy --stage local",
+    "remove": "sst remove --stage local",
+    "console": "sst console",
+    "test": "sst bind -- vitest run"
+  },
+  "devDependencies": {
+    "@serverless-stack/cli": "^1.18.4",
+    "@serverless-stack/resources": "^1.18.4",
+    "@tsconfig/node16": "^1.0.3",
+    "aws-cdk-lib": "2.50.0",
+    "typescript": "^4.9.5",
+    "vitest": "^0.28.5"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.272.0",
+    "@aws-sdk/client-dynamodb": "^3.272.0",
+    "@aws-sdk/util-dynamodb": "^3.272.0",
+    "@middy/core": "^4.2.4",
+    "@middy/error-logger": "^4.2.4",
+    "@middy/http-content-encoding": "^4.2.4",
+    "@middy/http-content-negotiation": "^4.2.4",
+    "@middy/http-cors": "^4.2.4",
+    "@middy/http-error-handler": "^4.2.4",
+    "@middy/http-event-normalizer": "^4.2.4",
+    "@middy/http-header-normalizer": "^4.2.4",
+    "@middy/http-json-body-parser": "^4.2.4",
+    "@middy/http-multipart-body-parser": "^4.2.4",
+    "@middy/http-partial-response": "^4.2.4",
+    "@middy/http-response-serializer": "^4.2.4",
+    "@middy/http-security-headers": "^4.2.4",
+    "@middy/http-urlencode-body-parser": "^4.2.4",
+    "@middy/http-urlencode-path-parser": "^4.2.4",
+    "@middy/input-output-logger": "^4.2.4",
+    "@middy/validator": "^4.2.4",
+    "@serverless-stack/node": "^1.18.4",
+    "axios": "^1.3.3",
+    "http-errors": "^2.0.0",
+    "middy-ajv": "^3.0.0",
+    "uuid": "^9.0.0"
+  },
+  "workspaces": [
+    "services"
+  ]
+}
