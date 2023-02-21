@@ -8,6 +8,7 @@ Custom Error Middleware used for customize errors.
 Custom Response helper used for customized responses.
 All Functions wrapped with a couple middlewares (cors, error, body parser, etc.).
 Except Auth stack, all stacks using jwt authorizer with cognito user pool to protect all routes.
+Functions have validators which named Request Validators. Validator Schema is used for validation.
 
 Stacks:
 -   User
