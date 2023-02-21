@@ -114,18 +114,24 @@ export const deleteFromFavorites = lambdaHandler(async (event) => {
 
 export const listFavorites = lambdaHandler(async (event) => {
     
+    const { LastEvaluatedKey  } = event.queryStringParameters
+
     const user = event.requestContext.authorizer.jwt.claims
 
     const dynamoDBClient = new DynamoDBClient({
       region: process.env.SERVICE_REGION
     })
-    const scanCommand  = new ScanCommand({
-      TableName: process.env.DogsTable,
-      FilterExpression: "username = :username",
-      ExpressionAttributeValues: {
-          ":username": { "S": `${user.email}` }
-      }
-    })
+    let params = {
+        TableName: process.env.DogsTable,
+        FilterExpression: "username = :username",
+        ExpressionAttributeValues: {
+            ":username": { "S": `${user.email}` }
+        },
+    }
+
+    if (LastEvaluatedKey) params.ExclusiveStartKey = JSON.stringify(LastEvaluatedKey)
+
+    const scanCommand  = new ScanCommand(params)
   
     try {
       const response = await dynamoDBClient.send(scanCommand)
